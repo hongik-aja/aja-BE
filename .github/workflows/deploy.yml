@@ -45,4 +45,4 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
-            sudo systemctl restart yourproject.service
+            sudo systemctl restart mutsa.service
