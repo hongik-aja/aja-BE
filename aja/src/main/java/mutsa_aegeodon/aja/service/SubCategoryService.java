@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SubCategoryService {
-    private final SubCategoryService subCategoryService;
     private final CategoryRepository categoryRepository;
     private final SubCategoryRepository subCategoryRepository;
 

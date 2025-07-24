@@ -14,7 +14,7 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
     public Category createCategory(String name) {
-        categoryRepository.findByName(name).ifPresent(c ->{
+        categoryRepository.findByCategoryName(name).ifPresent(c ->{
             throw new IllegalArgumentException("이미 존재하는 카테고리입니다.");
         });
         Category category = Category.builder()

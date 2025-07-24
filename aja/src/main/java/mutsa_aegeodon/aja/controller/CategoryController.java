@@ -14,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CategoryController {
     private final CategoryService categoryService;
-    private final CategoryRepository categoryRepository;
 
     @PostMapping
     public ResponseEntity<Category> createCateGory(@RequestParam String name) {
