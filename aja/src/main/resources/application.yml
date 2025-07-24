@@ -23,4 +23,6 @@ spring:
     redirect-uri: ${KAKAO_REDIRECT_URI}
 
   jwt:
-    secret: ${SECRET_JWT}
+    secret: my-very-secure-secret-key-which-is-at-least-32bytes!
+    access-token-expiration: 1800000 # 30분 (단위: milliseconds)
+    refresh-token-expiration: 1209600000 # 14일 (2주)
