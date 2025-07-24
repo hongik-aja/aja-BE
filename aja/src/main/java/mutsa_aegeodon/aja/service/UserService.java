@@ -12,23 +12,29 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil; // ✅ 주입 추가
 
     public Long createUser(UserRequestDto userRequestDto) {
-        //User 중복 확인코드
-        User user = userRepository.findById(userRequestDto.getUserId()).orElseThrow(
-                () -> new CustomException(ErrorCode.USER_NOT_FOUND));
+        User user = userRepository.findById(userRequestDto.getUserId())
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         return userRepository.save(user).getUserId();
     }
 
     public User getUserFromToken(String token) {
-        if (!JwtUtil.validateToken(token)) {
+        if (!jwtUtil.validateToken(token)) {
             throw new CustomException(ErrorCode.INVALID_TOKEN);
         }
 
-        Long userId = JwtUtil.getUserIdFromToken(token);
-        return userRepository.findById(userId)
+        String kakaoId = jwtUtil.getSocialIdFromToken(token);
+
+        return userRepository.findByKakaoId(kakaoId) // <- 이 메서드가 있어야 함!
                 .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
-        }
+    }
+
+    public String login(User user) {
+        return jwtUtil.generateAccessToken(user.getKakaoId());
+    }
 }

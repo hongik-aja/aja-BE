@@ -12,3 +12,9 @@ spring:
   h2:
     console:
       enabled: true
+  spring:
+    kakao:
+      client-id: abc123
+      redirect-uri: http://localhost/test/oauth
+    jwt:
+      secret: my-test-jwt-secret

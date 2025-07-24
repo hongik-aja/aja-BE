@@ -18,6 +18,7 @@ import java.util.Map;
 @Service
 public class KakaoAuthService {
 
+    private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -69,8 +70,7 @@ public class KakaoAuthService {
         User user = findOrCreateUser(kakaoId, nickname, profileImage);
 
         // 4. JWT 발급
-        return JwtUtil.createToken(user);
-    }
+        return jwtUtil.generateToken(user.getKakaoId(), jwtUtil.getAccessTokenExpiration(), "KAKAO");    }
 
     private User findOrCreateUser(String kakaoId, String nickname, String profileImage) {
         return userRepository.findByKakaoId(kakaoId)
