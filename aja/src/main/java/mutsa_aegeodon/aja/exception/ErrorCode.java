@@ -19,7 +19,8 @@ public enum ErrorCode {
     USER_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "해당 유저는 존재하지 않습니다"),
     LIKES_NOT_FOUND("USER_NOT_FOUND", HttpStatus.NOT_FOUND, "해당 유저는 존재하지 않습니다"),
 
-    INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류가 발생했습니다");
+    INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR, "서버 오류가 발생했습니다"),
+    INVALID_TOKEN("INVALID_TOKEN", HttpStatus.UNAUTHORIZED, "유효하지 않은 토큰입니다");
 
     private final String code;
     private final HttpStatus status;
