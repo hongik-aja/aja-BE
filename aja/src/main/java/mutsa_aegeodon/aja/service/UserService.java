@@ -14,11 +14,14 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final JwtUtil jwtUtil; // ✅ 주입 추가
+    private final JwtUtil jwtUtil; // 주입 추가
 
     public Long createUser(UserRequestDto userRequestDto) {
-        User user = userRepository.findById(userRequestDto.getUserId())
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+        User user = User.builder()
+                .nickname(userRequestDto.getNickname())
+                .kakaoId(userRequestDto.getKakaoId())
+                .profileImage(userRequestDto.getProfileImage())
+                .build();
 
         return userRepository.save(user).getUserId();
     }

@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class UserRequestDto {
-    private Long userId;
     private String kakaoId;
     private String nickname;
     private String profileImage;
