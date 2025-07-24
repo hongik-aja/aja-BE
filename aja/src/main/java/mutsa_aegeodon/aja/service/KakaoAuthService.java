@@ -25,7 +25,7 @@ public class KakaoAuthService {
     @Value("${spring.kakao.client-id}")
     private String clientId;
 
-    @Value("${kakao.redirect-uri}")
+    @Value("${spring.kakao.redirect-uri}")
     private String redirectUri;
 
     public String kakaoLogin(String code) {
