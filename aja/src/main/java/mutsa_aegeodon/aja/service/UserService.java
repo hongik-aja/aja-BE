@@ -1,6 +1,7 @@
 package mutsa_aegeodon.aja.service;
 
 import lombok.RequiredArgsConstructor;
+import mutsa_aegeodon.aja.config.jwt.JwtUtil;
 import mutsa_aegeodon.aja.dto.request.UserRequestDto;
 import mutsa_aegeodon.aja.entity.User;
 import mutsa_aegeodon.aja.exception.CustomException;
@@ -20,4 +21,14 @@ public class UserService {
 
         return userRepository.save(user).getUserId();
     }
+
+    public User getUserFromToken(String token) {
+        if (!JwtUtil.validateToken(token)) {
+            throw new CustomException(ErrorCode.INVALID_TOKEN);
+        }
+
+        Long userId = JwtUtil.getUserIdFromToken(token);
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+        }
 }
